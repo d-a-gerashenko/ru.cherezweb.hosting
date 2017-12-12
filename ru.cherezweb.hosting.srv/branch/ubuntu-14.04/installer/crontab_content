@@ -1,0 +1,5 @@
+# Строки должны заканчиваться символом \r, а загружать в cron только через файл.
+# m h  dom mon dow   command
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+*/2 * * * * php /etc/ru.cherezweb.hosting.srv/command/crash_monitor.php
+@reboot /etc/ru.cherezweb.hosting.srv/starter/start.sh

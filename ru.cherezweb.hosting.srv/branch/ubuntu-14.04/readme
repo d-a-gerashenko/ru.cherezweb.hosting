@@ -1,0 +1,15 @@
+php -v
+---
+PHP 5.5.9-1ubuntu4.11 (cli) (built: Jul  2 2015 15:23:08)
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.3, Copyright (c) 1999-2014, by Zend Technologies
+
+lsb_release -a
+---
+Distributor ID: Ubuntu
+Description:    Ubuntu 14.04.2 LTS
+Release:        14.04
+Codename:       trusty
+
+Рабочая папка скрипта /etc/ru.cherezweb.hosting.srv/
