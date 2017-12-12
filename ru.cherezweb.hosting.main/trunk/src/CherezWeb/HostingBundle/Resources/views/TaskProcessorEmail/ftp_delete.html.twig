@@ -1,0 +1,10 @@
+{% extends 'CherezWebHostingBundle:Email:layout.html.twig' %}
+
+{% block content %}
+    <h4>Удален ftp доступ с площадки "{{ allocationName }}"</h4>
+    <p>
+        Хост: {{ ftpHost }}<br/>
+        Логин: {{ ftpLogin }}<br/>
+        Директория: {{ ftpDir }}<br/>
+    </p>
+{% endblock content %}

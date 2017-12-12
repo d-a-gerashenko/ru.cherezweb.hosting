@@ -1,0 +1,8 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Обновление домена на площадке "{{ allocationName }}".
+---
+Адрес домена: http://{{ domainName }}/
+Директория: {{ domainDirPath }}
+{% endblock content %}

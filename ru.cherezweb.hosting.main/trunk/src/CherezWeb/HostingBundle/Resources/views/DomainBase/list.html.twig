@@ -1,0 +1,36 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{% extends 'CherezWebHostingBundle:Cp:layout.html.twig' %}
+{% block content_content %}
+    <p><button type="button" class="btn btn-success domainbase-create-btn">Добавить домен</button></p>
+    {{ flash('info',
+        '
+            <p>Здесь вы можете подтвердить права на принадлежащие вам домены 2-го уровня, это позволит привязывать домены и их поддомены к директориям на площадках аккаунта.</p>
+            <p>При привязке к площадке доменов (например: <a target="_blank" href="http://www.cherezweb.ru/">www.cherezweb.ru</a> и <a target="_blank" href="http://hosting.cherezweb.ru/">hosting.cherezweb.ru</a>), базовый домен второго уровня (в нашем случае: <a target="_blank" href="http://cherezweb.ru/">cherezweb.ru</a>) будет автоматически добавлен в список подтвержденных доменов аккаунта.</p>
+            <p><b>Если у вас нет домена, вы можете приобрести его у регистратора, например: <a target="_blank" href="http://nic.ru/">nic.ru</a>, <a target="_blank" href="http://reg.ru/">reg.ru</a></b></p>
+        ',
+    'button', true) }}
+    <div class="domainbases-ajax"><img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/></div>
+{% endblock content_content %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.domainbase-create-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_domainbase_create'));
+            });
+            var domainbasesAjax = $('.domainbases-ajax');
+            var updateItemsFunction = function () {
+                $.chwAjax().makeRequest({
+                    url: Routing.generate('cherez_web_hosting_cp_domainbase_list'),
+                    silent: true,
+                    htmlResponseHandler: function (responseContainer) {
+                        domainbasesAjax.html('');
+                        domainbasesAjax.append(responseContainer);
+                    }
+                });
+                setTimeout(updateItemsFunction, 10000);
+            };
+            updateItemsFunction();
+        });
+    </script>
+{% endblock foot_script_assetic %}

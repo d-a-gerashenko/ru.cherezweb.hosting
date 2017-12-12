@@ -1,0 +1,28 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <p>
+        Ftp доступ <b>"{{ ftp.name }}"</b> на площадке "{{ ftp.allocation.name }}" будет удален.
+    </p>
+    <p>
+        Вы действительно хотите удалить ftp доступ <b>"{{ ftp.name }}"</b> на площадке "{{ ftp.allocation.name }}"?
+    </p>
+    <hr/>
+    <button type="button" class="btn btn-primary">Отменить</button>
+    <button type="button" class="btn btn-danger ftp-delete-btn">Удалить ftp доступ "{{ ftp.name }}"</button>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Удаление ftp доступа'
+            });
+            container.find('.ftp-delete-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_ftp_delete', {ftp: "{{ ftp.id }}", confirmed: true}));
+            });
+            container.find('.btn-primary').click(function (e) {
+                container.dialog('close');
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

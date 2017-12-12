@@ -1,0 +1,44 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Объем диска</th>
+                <th>Стоимость</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in plans %}
+                <tr>
+                    <th scope="row">{{ plan.id }}</th>
+                    <td>{{ plan.title }}</td>
+                    <td style="width: 400px;">{{ plan.description | raw }}</td>
+                    <td>{{ (plan.diskQuota / 1073741824) | number_format(2, ',', ' ') }}&nbsp;ГБ</td>
+                    <td>{{ (plan.price / 100) | number_format(2, ',', ' ') }}&nbsp;р./мес.</td>
+                    <td>
+                        <button type="button" class="btn btn-success allocation-create-btn" plan-id="{{ plan.id }}">Создать площадку</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Выбор тарифа',
+                width: 1000
+            });
+            container.find('.allocation-create-btn').click(function (e) {
+                var planId = $(this).attr('plan-id');
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_allocation_create', {plan: planId}));
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

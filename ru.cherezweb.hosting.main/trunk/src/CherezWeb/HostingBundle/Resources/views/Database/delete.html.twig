@@ -1,0 +1,28 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <p>
+        База <b>"{{ database.name }}"</b> на площадке "{{ database.allocation.name }}" будет удалена.
+    </p>
+    <p>
+        Вы действительно хотите удалить базу <b>"{{ database.name }}"</b> на площадке "{{ database.allocation.name }}"?
+    </p>
+    <hr/>
+    <button type="button" class="btn btn-primary">Отменить</button>
+    <button type="button" class="btn btn-danger database-delete-btn">Удалить базу "{{ database.name }}"</button>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Удаление базы данных'
+            });
+            container.find('.database-delete-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_database_delete', {database: "{{ database.id }}", confirmed: true}));
+            });
+            container.find('.btn-primary').click(function (e) {
+                container.dialog('close');
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

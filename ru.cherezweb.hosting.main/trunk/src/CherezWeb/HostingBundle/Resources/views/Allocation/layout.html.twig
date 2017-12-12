@@ -1,0 +1,17 @@
+{% extends 'CherezWebHostingBundle::layout.html.twig' %}
+{% set headTitle = 'Редактирование площадки "' ~ allocation.name ~ '"' %}
+{% block headline %}Редактирование площадки "{{ allocation.name }}"{% endblock headline %}
+{% block page_header %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('cherez_web_hosting_cp_index') }}">Панель управления</a></li>
+        <li class="active">Редактирование площадки "{{ allocation.name }}"</li>
+    </ol>
+{% endblock page_header %}
+{% block content_sidebar %}
+    <div class="list-group">
+        <a href="{{ path('cherez_web_hosting_cp_database_list', {'allocation': allocation.id}) }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_database_list' %} active{% endif %}">Базы данных</a>
+        <a href="{{ path('cherez_web_hosting_cp_ftp_list', {'allocation': allocation.id}) }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_ftp_list' %} active{% endif %}">Ftp</a>
+        <a href="{{ path('cherez_web_hosting_cp_domain_list', {'allocation': allocation.id}) }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_domain_list' %} active{% endif %}">Привязанные домены</a>
+        <a href="{{ path('cherez_web_hosting_cp_job_list', {'allocation': allocation.id}) }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_job_list' %} active{% endif %}">Задачи по расписанию</a>
+    </div>
+{% endblock content_sidebar %}

@@ -1,0 +1,83 @@
+В этом случае важен реверс DNS, тот хост, который будем использовать, должен работать и в обратную сторону.
+Т.е. ip сервера должен вести на хост.
+Обычно оно все само работает, главное все правильно указать в панели хостера.
+Имя сервера хранится здесь /etc/hostname
+Локальные хосты /etc/hosts
+Применить изменения sudo hostname -F /etc/hostname
+
+Под рутом выполнить:
+apt-get update
+apt-get -y install subversion
+apt-get -y install bind9 bind9utils bind9-doc
+apt-get -y install libapache2-mod-php5 php5 php5-common php5-dev php5-curl php5-gd php5-intl php-pear php5-imagick php5-mcrypt php5-memcache php5-ming php5-mysql php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl
+
+php ./installer/php_set_conf.php
+
+В /etc/default/bind9 в строке OPTIONS добавить первым пукнтом -4, получится что-то вроде OPTIONS="-4 -u bind"
+
+Прописать в parameters.ini задать при необходимости значение app.main_server_url
+
+/etc/bind/named.conf.options
+должен выглядеть примерно так
+options {
+        directory "/var/cache/bind";
+        recursion no;
+        allow-transfer { none; };
+
+        dnssec-validation auto;
+
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+
+Зоны хранятся тут /etc/bind/named.conf.local
+Но нам нужен отдельный файл, создаем его.
+mkdir /etc/bind/cherezweb/
+touch /etc/bind/cherezweb/named.conf.cherezweb
+
+Еще нужна папка для db файлов с dns записями.
+mkdir /etc/bind/cherezweb/zones
+
+Теперь нужно добавить созданный файл в общий конфиг /etc/bind/named.conf
+Добавляем в конец строку
+include "/etc/bind/cherezweb/named.conf.cherezweb";
+
+Перезапускаем dns сервер
+service bind9 restart
+Проверяем его конфиг
+sudo named-checkconf
+Смотрим логи (ошибок не должно быть)
+sudo tail -f /var/log/syslog
+
+Для проверки в /etc/bind/cherezweb/named.conf.cherezweb можно создать зону
+zone "kupicifru.ru" {
+    type master;
+    file "/etc/bind/cherezweb/zones/db.kupicifru.ru";
+};
+
+Создать файл зоны
+/etc/bind/cherezweb/zones/db.kupicifru.ru
+В него записать
+$TTL    21600
+@       IN      SOA     ns1.cherezweb.ru. support.cherezweb.ru. (
+                              6         ; Serial
+                          14400         ; Refresh
+                            900         ; Retry
+                        1209600         ; Expire
+                          14400 )       ; Negative Cache TTL
+;
+
+; Name servers
+@       IN      NS      ns1.cherezweb.ru.
+@       IN      NS      ns2.cherezweb.ru.
+
+; Other A records
+@       IN      A       192.0.2.3
+www     IN      A       192.0.2.3
+
+И проверить через виндовую консоль
+nslookup
+server <ip сервера>
+kupicifru.ru
+
+Потом за собой нужно почистить, удалить эти тестовые данные.

@@ -1,0 +1,16 @@
+cherez_web_hosting_cp_billing:
+    pattern:  /billing
+    defaults: { _controller: CherezWebHostingBundle:Cp:billing }
+    options: { expose: true }
+
+cherez_web_hosting_cp_billing_transaction_list:
+    pattern:  /billing/transaction/list
+    defaults: { _controller: CherezWebHostingBundle:Billing:transactionList }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_billing_payment_make:
+    pattern:  /billing/payment/make
+    defaults: { _controller: CherezWebHostingBundle:Billing:makePayment }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"

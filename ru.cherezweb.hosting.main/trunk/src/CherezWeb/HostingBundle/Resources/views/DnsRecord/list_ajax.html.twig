@@ -1,0 +1,51 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {% if not dnsRecords %}
+        Список пуст...
+    {% else %}
+        <table class="table table-bordered table-striped table-hover dns-records-list">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Домен</th>
+                    <th>Тип</th>
+                    <th>Занчение</th>
+                    <th>Приоритет</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dnsRecord in dnsRecords %}
+                    <tr dns-record-id="{{ dnsRecord.id }}">
+                        <td>{{ dnsRecord.id }}</td>
+                        <td>{{ dnsRecord.host }}</td>
+                        <td>{{ dnsRecord.type }}</td>
+                        <td style="word-wrap: break-word;min-width: 250px;max-width: 250px;">{{ dnsRecord.value | json_encode() }}</td>
+                        <td>{% if dnsRecord.priority is null %}---{% else %}{{ dnsRecord.priority }}{% endif%}</td>
+                        <td>
+                            {% if dnsRecord.restrictionLevel < 20 %}
+                                <button type="button" class="btn btn-xs btn-warning btn-block dns-record-edit-btn">Редактировать</button>
+                            {% endif %}
+                            {% if dnsRecord.restrictionLevel < 10 %}
+                                <button type="button" class="btn btn-xs btn-danger btn-block dns-record-delete-btn">Удалить</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $(function () {
+                var container = $('#{{ responseContainerId }}');
+                container.find('.dns-record-edit-btn').click(function (e) {
+                    var dnsRecordId = $(this).closest('tr').attr('dns-record-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_dns_record_edit', {dnsRecord: dnsRecordId}));
+                });
+                container.find('.dns-record-delete-btn').click(function (e) {
+                    var dnsRecordId = $(this).closest('tr').attr('dns-record-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_dns_record_delete', {dnsRecord: dnsRecordId}));
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock content %}

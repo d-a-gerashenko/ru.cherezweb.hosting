@@ -1,0 +1,9 @@
+{% extends 'CherezWebHostingBundle:Email:layout.html.twig' %}
+
+{% block content %}
+<h4>Обновление домена на площадке "{{ allocationName }}"</h4>
+<p>
+    Адрес домена: <a href="http://{{ domainName }}">{{ domainName }}</a><br/>
+    Директория: {{ domainDirPath }}<br/>
+</p>
+{% endblock content %}

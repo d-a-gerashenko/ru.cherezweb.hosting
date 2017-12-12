@@ -1,0 +1,28 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <p>
+        Домен <b>"{{ domainBase.name }}"</b> будет удален с вашего аккаунта.
+    </p>
+    <p>
+        Вы действительно хотите удалить домен <b>"{{ domainBase.name }}"</b>?
+    </p>
+    <hr/>
+    <button type="button" class="btn btn-primary">Отменить</button>
+    <button type="button" class="btn btn-danger domainbase-delete-btn">Удалить домен "{{ domainBase.name }}"</button>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Удаление домена'
+            });
+            container.find('.domainbase-delete-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_domainbase_delete', {domainBase: "{{ domainBase.id }}", confirmed: true}));
+            });
+            container.find('.btn-primary').click(function (e) {
+                container.dialog('close');
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

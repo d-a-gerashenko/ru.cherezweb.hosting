@@ -1,0 +1,24 @@
+{% form_theme form 'MopaBootstrapBundle:Form:fields.html.twig' %}
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {% if showDomainBaseMessage is defined %}
+        {% include 'CherezWebHostingBundle:Domain:domain_base_message.html.twig' %}
+    {% endif %}
+    {{ form(form) }}
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Привязка домена к площадке'
+            });
+
+            var domainNameField = container.find('.domain-name-field');
+            var domainPathField = container.find('.domain-path-field');
+            domainNameField.on('input', function() {
+                domainPathField.val('/' + domainNameField.val());
+            });
+
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

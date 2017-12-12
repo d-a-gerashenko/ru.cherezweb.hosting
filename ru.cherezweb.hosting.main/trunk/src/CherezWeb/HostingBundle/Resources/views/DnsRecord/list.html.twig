@@ -1,0 +1,53 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{% extends 'CherezWebHostingBundle:Cp:layout.html.twig' %}
+{% block page_header %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('cherez_web_hosting_cp_index') }}">Панель управления</a></li>
+        <li><a href="{{ path('cherez_web_hosting_cp_domainbase_list') }}">Домены аккаунта</a></li>
+        <li class="active">DNS редактор для {{ domainBase.name }}</li>
+    </ol>
+    <div class="page-header">
+        <h1>DNS редактор для {{ domainBase.name }}</h1>
+    </div>
+{% endblock page_header %}
+{% block content_content %}
+    <p>
+        <b>Добавить DNS запись:</b>
+        <button type="button" record-type="A" class="btn btn-success dns-record-create-btn">A</button>
+        <button type="button" record-type="CNAME" class="btn btn-success dns-record-create-btn">CNAME</button>
+        <button type="button" record-type="TXT" class="btn btn-success dns-record-create-btn">TXT</button>
+        <button type="button" record-type="NS" class="btn btn-success dns-record-create-btn">NS</button>
+        <button type="button" record-type="MX" class="btn btn-success dns-record-create-btn">MX</button>
+    </p>
+    {{ flash('info',
+        '
+            <p>DNS записи в сети Интернет обновляются с задержкой, которая может достигать нескольких суток.</p>
+            <p>Записи с типом A создаются автоматически для доменов подключаемых на площадку.</p>
+        ',
+    'button', true) }}
+    <div class="dns-records-ajax"><img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/></div>
+{% endblock content_content %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.dns-record-create-btn').click(function (e) {
+                var recordType = $(e.target).attr('record-type');
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_dns_record_create', {domainBase: '{{ domainBase.id }}', recordType: recordType}));
+            });
+            var dnsRecordsAjax = $('.dns-records-ajax');
+            var updateItemsFunction = function () {
+                $.chwAjax().makeRequest({
+                    url: Routing.generate('cherez_web_hosting_cp_dns_record_list', {domainBase: '{{ domainBase.id }}'}),
+                    silent: true,
+                    htmlResponseHandler: function (responseContainer) {
+                        dnsRecordsAjax.html('');
+                        dnsRecordsAjax.append(responseContainer);
+                    }
+                });
+                setTimeout(updateItemsFunction, 10000);
+            };
+            updateItemsFunction();
+        });
+    </script>
+{% endblock foot_script_assetic %}

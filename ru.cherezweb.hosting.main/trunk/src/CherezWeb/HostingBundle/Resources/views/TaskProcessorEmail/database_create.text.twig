@@ -1,0 +1,12 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Создана база данных на площадке "{{ allocationName }}".
+
+Для доступа к базе используйте:
+---
+Хост базы: {{ bdHost }}
+Имя базы: {{ bdName }}
+Логин: {{ bdLogin }}
+Пароль: {{ bdPassword }}
+{% endblock content %}

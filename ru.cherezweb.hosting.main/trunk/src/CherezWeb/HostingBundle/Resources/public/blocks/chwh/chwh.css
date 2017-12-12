@@ -1,0 +1,8 @@
+.navbar .logo {
+    margin: 10px;
+    display: block;
+    width: 179px;
+    height: 70px;
+    background: no-repeat left top;
+    background-image: url('logo.png');
+}

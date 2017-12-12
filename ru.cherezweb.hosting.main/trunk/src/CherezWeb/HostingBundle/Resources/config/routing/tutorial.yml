@@ -1,0 +1,9 @@
+cherez_web_hosting_tutorial_index:
+    pattern:  /
+    defaults: { _controller: CherezWebHostingBundle:Tutorial:index }
+    options: { expose: true }
+
+cherez_web_hosting_tutorial_show:
+    pattern:  /show/{tutorial}
+    defaults: { _controller: CherezWebHostingBundle:Tutorial:show }
+    options: { expose: true }

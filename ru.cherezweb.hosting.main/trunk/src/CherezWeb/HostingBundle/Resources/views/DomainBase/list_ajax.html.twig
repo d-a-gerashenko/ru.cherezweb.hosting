@@ -1,0 +1,61 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {% if not domainBases %}
+        Список пуст...
+    {% else %}
+        <table class="table table-bordered table-striped table-hover domainbases-list">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Состояние</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for domainBase in domainBases %}
+                    <tr domainbase-id="{{ domainBase.id }}">
+                        <th scope="row">{{ domainBase.name }}</th>
+                        <td>
+                            {% if domainBase.state == 'confirmation' %}
+                                <img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/><br/>
+                                Подтверждение (последняя проверка: {{ '' | date('d.m.Y H:i:s') }})
+                                <hr/>
+                                <p>
+                                    Для подтверждения домена "{{ domainBase.name }}" добавьте в DNS редакторе запись с типом CNAME и значением "hosting.cherezweb.ru" для его поддомена "{{ domainBase.confirmationHost }}".
+                                </p>
+                            {% elseif domainBase.state == 'activation' %}
+                                <img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/><br/>
+                                Идет активация
+                            {% elseif domainBase.state == 'active' %}
+                                Активен
+                            {% elseif domainBase.state == 'deactivation' %}
+                                <img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/><br/>
+                                Идет деактивация
+                            {% elseif domainBase.state == 'inactive' %}
+                                Деактивирован
+                            {% endif %}
+                        <td>
+                            {% if domainBase.state == 'active' %}
+                                <a class="btn btn-xs btn-warning btn-block" href="{{ path('cherez_web_hosting_cp_dns_record_list', {'domainBase': domainBase.id}) }}">DNS редактор</a>
+                            {% endif %}
+                            {% if domainBase.state == 'deactivation' %}
+                                После деактивации домен можно будет удалить
+                            {% else %}
+                                <button type="button" class="btn btn-xs btn-danger btn-block domainbase-delete-btn">Удалить</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $(function () {
+                var container = $('#{{ responseContainerId }}');
+                container.find('.domainbase-delete-btn').click(function (e) {
+                    var domainBaseId = $(this).closest('tr').attr('domainbase-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_domainbase_delete', {domainBase: domainBaseId}));
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock content %}

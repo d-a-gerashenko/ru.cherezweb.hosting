@@ -1,0 +1,54 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {% if not databases %}
+        Список пуст...
+    {% else %}
+        <table class="table table-bordered table-striped table-hover databases-list">
+            <thead>
+                <tr>
+                    <th>Имя базы данных</th>
+                    <th>Хост</th>
+                    <th>Логин</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for database in databases %}
+                    <tr database-id="{{ database.id }}">
+                        <th scope="row">{{ database.name }}</th>
+                        <td>{{ database.host }}</td>
+                        <td>{{ database.name }}</td>
+                        <td>
+                            {% if database.lockingTasks %}
+                                <b>Обрабатываются задачи:</b><br/>
+                                {% include 'CherezWebHostingBundle:Task:render_task_list.html.twig' with {'tasks': database.lockingTasks} only  %}
+                                <img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/>
+                            {% else %}
+                                <button type="button" class="btn btn-xs btn-info btn-block database-phpmyadmin-btn">Открыть phpMyAdmin</button>
+                                <button type="button" class="btn btn-xs btn-warning btn-block database-change-password-btn">Изменить пароль</button>
+                                <button type="button" class="btn btn-xs btn-danger btn-block database-delete-btn">Удалить</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $(function () {
+                var container = $('#{{ responseContainerId }}');
+                container.find('.database-change-password-btn').click(function (e) {
+                    var databaseId = $(this).closest('tr').attr('database-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_database_change_password', {database: databaseId}));
+                });
+                container.find('.database-delete-btn').click(function (e) {
+                    var databaseId = $(this).closest('tr').attr('database-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_database_delete', {database: databaseId}));
+                });
+                container.find('.database-phpmyadmin-btn').click(function (e) {
+                    var databaseId = $(this).closest('tr').attr('database-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_database_phpmyadmin', {database: databaseId}));
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock content %}

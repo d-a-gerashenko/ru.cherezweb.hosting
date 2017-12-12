@@ -1,0 +1,4 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{{ advanced_flash('warning', 'Требуется подтверждение домена', '' ~
+    '<p>Запрошенный вами уже присутствует в системе, если это ваш домен, необходимо подтвердить права на его использование, для этого перейдите на <a href="' ~ path('cherez_web_hosting_cp_domainbase_list') ~ '" target="_blank">страницу управления доменами аккаунта</a>.<p>'  ~
+'', '', true) }}

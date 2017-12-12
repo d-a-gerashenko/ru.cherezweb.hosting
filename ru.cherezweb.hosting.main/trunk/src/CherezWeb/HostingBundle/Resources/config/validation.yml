@@ -1,0 +1,215 @@
+CherezWeb\HostingBundle\Entity\Job:
+    properties:
+        schedule:
+            - NotBlank:
+                groups: [Default]
+                message: Не указано расписание.
+            - Length:
+                groups: [Default]
+                max: 100
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+                # Сгенерировано через function buildRegexp(), код закомментирован в классе Job.
+                pattern: '/^((\*(?:\/\d+)?|(?:[0-5]?\d)(?:-(?:[0-5]?\d)(?:\/\d+)?)?(?:,(?:[0-5]?\d)(?:-(?:[0-5]?\d)(?:\/\d+)?)?)*)\s+(\*(?:\/\d+)?|(?:[01]?\d|2[0-3])(?:-(?:[01]?\d|2[0-3])(?:\/\d+)?)?(?:,(?:[01]?\d|2[0-3])(?:-(?:[01]?\d|2[0-3])(?:\/\d+)?)?)*)\s+(\*(?:\/\d+)?|(?:0?[1-9]|[12]\d|3[01])(?:-(?:0?[1-9]|[12]\d|3[01])(?:\/\d+)?)?(?:,(?:0?[1-9]|[12]\d|3[01])(?:-(?:0?[1-9]|[12]\d|3[01])(?:\/\d+)?)?)*)\s+(\*(?:\/\d+)?|(?:[1-9]|1[012])(?:-(?:[1-9]|1[012])(?:\/\d+)?)?(?:,(?:[1-9]|1[012])(?:-(?:[1-9]|1[012])(?:\/\d+)?)?)*|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+(\*(?:\/\d+)?|(?:[0-6])(?:-(?:[0-6])(?:\/\d+)?)?(?:,(?:[0-6])(?:-(?:[0-6])(?:\/\d+)?)?)*|mon|tue|wed|thu|fri|sat|sun)|(@yearly|@annually|@monthly|@weekly|@daily|@midnight|@hourly))$/'
+                message: Неправильный формат расписания.
+        scriptPath:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан путь.
+            - Length:
+                groups: [Default]
+                max: 150
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+                pattern: '/^(\/[A-Za-z\d\-_]+[A-Za-z\d\.\-_]*)+$/'
+CherezWeb\HostingBundle\Entity\Domain:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [name]
+            errorPath: name
+            message: 'Домен с таким именем уже привязан к одной из площадок.'
+    properties:
+        name:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан домен.
+            - Length:
+                groups: [Default]
+                max: 100
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+#                ^
+#                        (?:
+#                                (?:
+#                                        (?:
+#                                                        (?:
+#                                                                [A-Za-z0-9]+
+#                                                                [-A-Za-z0-9]*
+#                                                                [A-Za-z0-9]+
+#                                                        )
+#                                                |
+#                                                        [A-Za-z0-9]+
+#                                        )
+#                                        \.
+#                                )+
+#                                (?:
+#                                        (?:
+#                                                        (?:
+#                                                                [A-Za-z0-9]+
+#                                                                [-A-Za-z0-9]*
+#                                                                [A-Za-z0-9]+
+#                                                        )
+#                                                |
+#                                                        [A-Za-z0-9]+
+#                                        )
+#                                ){2,}
+#                        )
+#                $
+                pattern: '/^(?:(?:(?:(?:[A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+)|[A-Za-z0-9]+)\.)+(?:(?:(?:[A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+)|[A-Za-z0-9]+)){2,})$/'
+                message: Неправильный формат домена.
+        dirPath:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан путь.
+            - Length:
+                groups: [Default]
+                max: 150
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+                pattern: '/^(\/|(\/[A-Za-z\d\-_]+[A-Za-z\d\.\-_]*)*)$/'
+                message: Неправильный формат пути.
+CherezWeb\HostingBundle\Entity\DomainBase:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [name, user]
+            errorPath: name
+            message: 'Домен с таким именем уже используется на данном аккаунте.'
+    properties:
+        name:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан домен.
+            - Length:
+                groups: [Default]
+                max: 100
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+                pattern: '/^(?:(?:(?:(?:[A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+)|[A-Za-z0-9]+)\.)(?:(?:(?:[A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+)|[A-Za-z0-9]+)){2,})$/'
+                message: Неправильный формат домена.
+CherezWeb\HostingBundle\Entity\Ftp:
+    properties:
+        dirPath:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан путь.
+            - Length:
+                groups: [Default]
+                max: 150
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+                pattern: '/^(\/|(\/[A-Za-z\d\-_]+[A-Za-z\d\.\-_]*)*)$/'
+                message: Неправильный формат пути.
+CherezWeb\HostingBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            groups: [Default]
+            fields: [email]
+            message: Этот адрес уже используется.
+    properties:
+        email:
+            - NotBlank:
+                groups: [Default, RecoverType, RegistrationType]
+                message: Не указан адрес электронной почты.
+            - Email:
+                groups: [Default, RecoverType, RegistrationType]
+                message: В адресе электронной почты допущена ошибка.
+        # Валидацию не зашифрованного пароля используем только в тех формах, где требуется ввод пароля.
+        password:
+            - NotBlank:
+                groups: [RegistrationType, ChangePasswordType, ChangeEmailType, RecoverPasswordType]
+                message: Пароль не должен быть пустым.
+            - Length:
+                groups: [RegistrationType, ChangePasswordType, ChangeEmailType, RecoverPasswordType]
+                min: 8
+                minMessage: Минимальная длина пароля {{ limit }} символов.
+                max: 50
+                maxMessage: Максимальная длина пароля {{ limit }} символов.
+CherezWeb\HostingBundle\Entity\DnsRecord:
+    constraints:
+        - CherezWeb\HostingBundle\Validator\Constraints\DnsRecordConstraint:
+            groups: [Default]
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            groups: [Default]
+            fields: [domainBaseName, host, type, value, isDeleted]
+            # Из-за value нужен специальный запрос.
+            repositoryMethod: findUnique
+            message: 'Такая DNS запись уже существует.'
+    properties:
+        host:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан хост.
+            - Length:
+                groups: [Default]
+                max: 100
+                maxMessage: Длина поля не должна быть больше {{ limit }} символов.
+            - Regex:
+                groups: [Default]
+#                ^
+#                        (?:
+#                                        (?:
+#                                                (?:
+#                                                        (?:
+#                                                                        (?:
+#                                                                                [A-Za-z0-9]+
+#                                                                                [-A-Za-z0-9]*
+#                                                                                [A-Za-z0-9]+
+#                                                                        )
+#                                                                |
+#                                                                        [A-Za-z0-9]+
+#                                                                |
+#                                                                        \*
+#                                                        )
+#                                                        \.
+#                                                )*
+#                                                (?:
+#                                                        (?:
+#                                                                        (?:
+#                                                                                [A-Za-z0-9]+
+#                                                                                [-A-Za-z0-9]*
+#                                                                                [A-Za-z0-9]+
+#                                                                        )
+#                                                                |
+#                                                                        [A-Za-z0-9]+
+#                                                                |
+#                                                                        \*
+#                                                        )
+#                                                )
+#                                        )
+#                                |
+#                                        @
+#                        )
+#                $
+                pattern: '/^(?:(?:(?:(?:(?:[A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+)|[A-Za-z0-9]+|\*)\.)*(?:(?:(?:[A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+)|[A-Za-z0-9]+|\*)))|@)$/'
+                message: Неправильный формат хоста.
+        type:
+            - NotBlank:
+                groups: [Default]
+                message: Не указан тип.
+        value:
+            - NotBlank:
+                groups: [Default]
+                message: Значение не может быть пустым.
+        priority:
+            - Range:
+                groups: [Default]
+                max: 65535
+                maxMessage: Значение не может быть больше {{ limit }}
+                min: 0
+                minMessage: Значение не может быть меньше {{ limit }}

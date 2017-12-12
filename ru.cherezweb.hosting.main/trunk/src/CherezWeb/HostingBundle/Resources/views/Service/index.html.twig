@@ -1,0 +1,286 @@
+{% extends 'CherezWebHostingBundle::layout.html.twig' %}
+{% block page_header %}{% endblock page_header %}
+{% block navbar_class %}navbar_landing-page navbar navbar-default navbar-fixed-top navbar-transparent{% endblock navbar_class %}
+{% block body_tag %}<body id="page-home" class="landing-page">{% endblock body_tag %}
+{% block container %}
+    <!-- begin:header -->
+    <div style="background-image: url('{{ asset('bundles/cherezwebhosting/landing_page/img/img01.jpg') }}');" id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header-caption">
+                        <h2 class="animated fadeInLeft">Выгодный хостинг!</h2>
+                        <div class="animated fadeInDown">
+                            <p>
+                                <strong>Помесячная оплата.</strong>
+                                <br/>
+                                <strong>Панель управления.</strong>
+                                <br/>
+                                <strong>SSH доступ.</strong>
+                            </p>
+                            <div class="marg30-top-btm"><a href="#service" class="btn btn-lucky btn-xl menus">Узнать больше</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:header -->
+
+    <!-- begin:service -->
+    <div id="service">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">
+                        <h2 class="hyphenation">Мы предоставляем <small>И делаем это качественно!</small></h2>
+                    </div>
+                </div>
+            </div>
+            <!-- break -->
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="service-content">
+                        <h3>Панель управления</h3>
+                        <p>Удобное и понятное управление:</p>
+                        <ul>
+                            <li>площадками;</li>
+                            <li>базами данных;</li>
+                            <li>FTP доступами;</li>
+                            <li>привязкой доменов;</li>
+                            <li>расписанием заданий;</li>
+                            <li>оплатой...</li>
+                        </ul>
+                        <span class="service-icon"> <i class="fa fa-gears"></i></span>
+                    </div>
+                </div>	
+                <!-- break -->
+                <div class="col-md-4 col-sm-4">
+                    <div class="service-content">
+                        <h3>SSH доступ</h3>
+                        <p>Доступ к консоли Linux позволяет:</p>
+                        <ul>
+                            <li>находить нужные файлы через поиск;</li>
+                            <li>загружать архивы с установщиками CMS прямо с сайтов разработчиков;</li>
+                            <li>настраивать резервное копирование...</li>
+                        </ul>
+                        <span class="service-icon"> <i class="fa fa-lock"></i></span>
+                    </div>
+                </div>	
+                <!-- break -->
+                <div class="col-md-4 col-sm-4">
+                    <div class="service-content">
+                        <h3>Выгодные условия</h3>
+                        <p>Мы не заставляем наших клиентов покупать под каждый сайт отдельный хостинг и не накладываем мизерные ограничения на число доменов или баз данных на площадке.</p>
+                        <span class="service-icon"> <i class="fa fa-sliders"></i></span>
+                    </div>
+                </div>	
+            </div>
+        </div>
+    </div>
+    <!-- end:service -->
+
+    <!-- begin:component -->
+    <div id="component">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">
+                        <h2>Нам доверяют <small>Мы это ценим <i class="fa fa-heart-o"></i></small></h2>
+                    </div>
+                </div>
+            </div>
+            <!-- break -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>Лидирующая оптическая сеть на Дальнем Востоке. Более 20 лет успешной работы на рынке оптической коррекции зрения. Более 100 сотрудников по филиалам во всех крупных городах Приморского края.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-img">
+                                <img src="{{ asset('bundles/cherezwebhosting/blocks/landing-page/testimonial-ostoptik.png') }}" alt="Ост-Оптик">
+                            </div>
+                            <div class="testimonial-author-name">
+                                <h4><strong>Ост-Оптик</strong>, <a href="http://www.ostoptik.ru/" target="_blank">www.ostoptik.ru</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>Динамично развивающаяся торгово-строительная компания. Более 10 лет является одним из лидеров среди поставщиков фасадных отделочных материалов в Приморском крае.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-img">
+                                <img src="{{ asset('bundles/cherezwebhosting/blocks/landing-page/testimonial-kalitadv.png') }}" alt="Калита ДВ">
+                            </div>
+                            <div class="testimonial-author-name">
+                                <h4><strong>Калита ДВ</strong>, <a href="http://www.kalitadv.ru/" target="_blank">www.kalitadv.ru</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>Молодая федеральная сеть салонов оптики, основанная в городе Санкт-Петербурге. Компания предоставляет качественный уровень обслуживания по минимальной цене.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-img">
+                                <img src="{{ asset('bundles/cherezwebhosting/blocks/landing-page/testimonial-vidno.png') }}" alt="Оптика \"Видно\"">
+                            </div>
+                            <div class="testimonial-author-name">
+                                <h4><strong>Оптика "Видно"</strong>, <a href="http://www.vidno.me/" target="_blank">www.vidno.me</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:component -->
+
+    <!-- begin:promo -->
+    <div class="promo" style="background-image: url('{{ asset('bundles/cherezwebhosting/landing_page/img/img05.jpg') }}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="promo-text">
+                        <div class="page-title">
+                            <h2 class="text-uppercase hyphenation">Распределенная архитектура <small><i class="fa fa-cloud"></i> Облачные технологии.</small></h2>
+                        </div>
+                        <h3>Надежные дата-центры в Нью-Йорке (<a target="_blank" href="http://www.equinix.com/">Equinix</a> и <a target="_blank" href="http://www.telx.com/">Telx</a>).</h3>
+                        <h3>Сервера оборудованные только SSD дисками.</h3>
+                        <h3>Высокая отказоустойчивость за счет множества независимых серверов.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:promo -->
+
+    <!-- begin:about -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">
+                        <h2>Бесплатная почта <small>А также DNS хостинг!</small></h2>
+                    </div>
+                </div>
+            </div>
+            <!-- break -->
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="heading-title">
+                        <h3>Лидеры рынка</h3>
+                    </div>
+                    <p>Компании "Яндекс" и "Google" ушли далеко вперед в области почтовых сервисов:</p>
+                    <ul>
+                        <li>безукоризненный веб-интерфейс,</li>
+                        <li>предварительный просмотр вложений,</li>
+                        <li>отправка больших вложений через облачное хранилище...</li>
+                    </ul>
+                    <p>Мы рекомендуем БЕСПЛАТНЫЙ сервис "Почта для домена" от компании "Яндекс", который дополнительно предоставляет БЕСПЛАТНЫЙ DNS хостинг.</p>
+                </div>
+                <!-- break -->
+                <div class="col-md-6 col-sm-6">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="team-container">
+                                <img src="{{ asset('bundles/cherezwebhosting/blocks/landing-page/yandex-pdd.jpg') }}" class="img-responsive" alt="Яндекс - Почта для домена">
+                                <div class="team-desc">
+                                    <h4>Почта для домена <small>Яндекс</small></h4>
+                                    <ul class="list-inline">
+                                        <li><a target="_blank" href="https://pdd.yandex.ru/" class="btn btn-default btn-lg" role="button"><span aria-hidden="true" class="fa fa-external-link"></span> Открыть</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="team-container">
+                                <img src="{{ asset('bundles/cherezwebhosting/blocks/landing-page/google-apps.jpg') }}" class="img-responsive" alt="Google - Apps">
+                                <div class="team-desc">
+                                    <h4>Apps <small>Google</small></h4>
+                                    <ul class="list-inline">
+                                        <li><a target="_blank" href="https://www.google.com/intx/ru/work/apps/business/" class="btn btn-default btn-lg" role="button"><span aria-hidden="true" class="fa fa-external-link"></span> Открыть</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:about -->
+
+    <!-- begin:promo -->
+    <div class="promo-03" style="background-image: url('{{ asset('bundles/cherezwebhosting/landing_page/img/img01.jpg') }}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="promo-text">
+                        <div class="page-title">
+                            <h2 class="text-capitalize">Начнем! <small>Будем создавать Интернет вместе!</small></h2>
+                        </div>
+                        <div class="marg30-top-btm"><a href="{{ path('cherez_web_hosting_security_registartion') }}" class="btn btn-lucky btn-xl">Регистрация</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:promo -->
+
+    <!-- begin:copyright -->
+    <div id="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn btn-lucky menus text-center btn-totop" href="#page-home"><i class="fa fa-angle-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:copyright -->
+{% endblock container %}
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Bootstrap -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600" rel="stylesheet" type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css"/>
+    {% stylesheets filter='cssrewrite,uglifycss'
+    'bundles/cherezwebhosting/blocks/landing-page/landing-page.less'
+    'bundles/cherezwebhosting/landing_page/css/font-awesome.css'
+    'bundles/cherezwebhosting/landing_page/css/animate.css'
+    'bundles/cherezwebhosting/landing_page/css/style.less'
+    'bundles/cherezwebhosting/landing_page/css/skin.less'
+    %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock stylesheets %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts filter='uglifyjs2'
+    'bundles/cherezwebhosting/landing_page/js/jquery.nicescroll.min.js'
+    'bundles/cherezwebhosting/landing_page/js/jquery.easing.js'
+    'bundles/cherezwebhosting/landing_page/js/classie.js'
+    'bundles/cherezwebhosting/landing_page/js/cbpAnimatedHeader.js'
+    'bundles/cherezwebhosting/landing_page/js/jquery.parallax.js'
+    'bundles/cherezwebhosting/landing_page/js/script.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    {% javascripts filter='uglifyjs2'
+        'bundles/cherezwebhosting/landing_page/js/html5shiv.min.js'
+        'bundles/cherezwebhosting/landing_page/js/respond.min.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <![endif]-->
+{% endblock foot_script_assetic %}

@@ -1,0 +1,50 @@
+{% form_theme form 'MopaBootstrapBundle:Form:fields.html.twig' %}
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {{ form(form) }}
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Создание задания по расписанию',
+                width: 900
+            });
+            var cronScheduleInput = container.find('.cron-schedule');
+            var cronScheduleInputValue = cronScheduleInput.val();
+            var cronScheduleInputWidget = $('<div class="form-inline"></div>');
+            cronScheduleInput.after(cronScheduleInputWidget);
+            cronScheduleInputWidget.cron({
+                onChange: function() {
+                    cronScheduleInput.val($(this).cron("value"));
+                }
+            });
+            // Возвращаем прежнее значение после инициализации виджета. Далее будет еще одна проверка.
+            cronScheduleInput.val(cronScheduleInputValue);
+            cronScheduleInputWidget.find('select').each(function() {
+                $(this).addClass('form-control');
+            });
+            
+            var pasteBtn = $('<button type="button" class="btn btn-warning">Вы указали неправильный формат расписания, хотите всатиь значение из редактора?</button>');
+            pasteBtn.css('display', 'none');
+            pasteBtn.click(function() {
+                cronScheduleInput.val(cronScheduleInputWidget.cron("value"));
+                pasteBtn.css('display', 'none');
+            });
+            
+            var validateScheduleFunction = function () {
+                try {
+                    cronScheduleInputWidget.cron("value", cronScheduleInput.val());
+                    pasteBtn.css('display', 'none');
+                } catch(err) {
+                    pasteBtn.css('display', 'block');
+                    cronScheduleInputWidget.before(pasteBtn);
+                }
+            };
+            validateScheduleFunction();
+            cronScheduleInput.on("change keyup paste", function(){
+                validateScheduleFunction();
+            });
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

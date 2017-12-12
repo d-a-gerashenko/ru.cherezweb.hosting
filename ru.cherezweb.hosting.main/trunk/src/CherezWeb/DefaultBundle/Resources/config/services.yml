@@ -1,0 +1,14 @@
+parameters:
+    twig.controller.exception.class: CherezWeb\DefaultBundle\Service\ExceptionController
+services:
+    cherez_web.default.all_action_listener:
+        class: CherezWeb\DefaultBundle\EventListener\AllActionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+    cherez_web.default.instant_mailer:
+        class: %swiftmailer.class%
+        arguments: [@?swiftmailer.transport.real]
+    cherez_web.default.mailer:
+        class: CherezWeb\DefaultBundle\Service\Mailer
+        arguments: [@mailer, @cherez_web.default.instant_mailer, @templating]

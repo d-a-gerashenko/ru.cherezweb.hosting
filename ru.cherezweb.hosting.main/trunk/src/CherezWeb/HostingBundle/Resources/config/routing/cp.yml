@@ -1,0 +1,195 @@
+_cherez_web_hosting_cp_billing:
+    resource: "@CherezWebHostingBundle/Resources/config/routing/cp/billing.yml"
+    prefix:   /cp/billing
+    
+cherez_web_hosting_cp_index:
+    pattern:  /
+    defaults: { _controller: CherezWebHostingBundle:Cp:index }
+    options: { expose: true }
+
+cherez_web_hosting_cp_allocation_list:
+    pattern:  /allocation/list
+    defaults: { _controller: CherezWebHostingBundle:Allocation:list }
+    options: { expose: true }
+
+cherez_web_hosting_cp_allocation_create:
+    pattern:  /allocation/create_on_plan/{plan}
+    defaults: { _controller: CherezWebHostingBundle:Allocation:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_allocation_delete:
+    pattern:  /allocation/delete/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Allocation:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_allocation_edit:
+    pattern:  /allocation/edit/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Allocation:edit }
+
+cherez_web_hosting_cp_allocation_prolongation:
+    pattern:  /allocation/prolongation/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Allocation:prolongation }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_allocation_change_password:
+    pattern:  /allocation/change_password/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Allocation:changePassword }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_plan_list:
+    pattern:  /plan/list
+    defaults: { _controller: CherezWebHostingBundle:Plan:list }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_account_settings:
+    pattern:  /account_settings
+    defaults: { _controller: CherezWebHostingBundle:Cp:accountSettings }
+    options: { expose: true }
+    
+cherez_web_hosting_cp_database_list:
+    pattern:  /database/list/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Database:list }
+    options: { expose: true }
+    
+cherez_web_hosting_cp_database_create:
+    pattern:  /database/create/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Database:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_database_delete:
+    pattern:  /database/delete/{database}
+    defaults: { _controller: CherezWebHostingBundle:Database:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_database_phpmyadmin:
+    pattern:  /database/phpmyadmin/{database}
+    defaults: { _controller: CherezWebHostingBundle:Database:phpmyadmin }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_database_change_password:
+    pattern:  /database/change_password/{database}
+    defaults: { _controller: CherezWebHostingBundle:Database:changePassword }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_ftp_list:
+    pattern:  /ftp/list/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Ftp:list }
+    options: { expose: true }
+    
+cherez_web_hosting_cp_ftp_create:
+    pattern:  /ftp/create/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Ftp:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_ftp_delete:
+    pattern:  /ftp/delete/{ftp}
+    defaults: { _controller: CherezWebHostingBundle:Ftp:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_ftp_change_password:
+    pattern:  /ftp/change_password/{ftp}
+    defaults: { _controller: CherezWebHostingBundle:Ftp:changePassword }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_ftp_change_dir:
+    pattern:  /ftp/change_dir/{ftp}
+    defaults: { _controller: CherezWebHostingBundle:Ftp:changeDir }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_job_list:
+    pattern:  /job/list/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Job:list }
+    options: { expose: true }
+    
+cherez_web_hosting_cp_job_create:
+    pattern:  /job/create/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Job:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_job_delete:
+    pattern:  /job/delete/{job}
+    defaults: { _controller: CherezWebHostingBundle:Job:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_job_edit:
+    pattern:  /job/edit/{job}
+    defaults: { _controller: CherezWebHostingBundle:Job:edit }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_domain_list:
+    pattern:  /domain/list/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Domain:list }
+    options: { expose: true }
+    
+cherez_web_hosting_cp_domain_create:
+    pattern:  /domain/create/{allocation}
+    defaults: { _controller: CherezWebHostingBundle:Domain:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_domain_delete:
+    pattern:  /domain/delete/{domain}
+    defaults: { _controller: CherezWebHostingBundle:Domain:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_domain_edit:
+    pattern:  /domain/edit/{domain}
+    defaults: { _controller: CherezWebHostingBundle:Domain:edit }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    
+cherez_web_hosting_cp_domainbase_list:
+    pattern:  /domainbase/list
+    defaults: { _controller: CherezWebHostingBundle:DomainBase:list }
+    options: { expose: true }
+    
+cherez_web_hosting_cp_domainbase_create:
+    pattern:  /domainbase/create
+    defaults: { _controller: CherezWebHostingBundle:DomainBase:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_domainbase_delete:
+    pattern:  /domainbase/delete/{domainBase}
+    defaults: { _controller: CherezWebHostingBundle:DomainBase:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+
+cherez_web_hosting_cp_dns_record_list:
+    pattern:  /dns_record/list/{domainBase}
+    defaults: { _controller: CherezWebHostingBundle:DnsRecord:list }
+    options: { expose: true }
+cherez_web_hosting_cp_dns_record_create:
+    pattern:  /dns_record/create/{domainBase}/{recordType}
+    defaults: { _controller: CherezWebHostingBundle:DnsRecord:create }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    requirements:
+        recordType: A|CNAME|TXT|NS|MX
+cherez_web_hosting_cp_dns_record_edit:
+    pattern:  /dns_record/edit/{dnsRecord}
+    defaults: { _controller: CherezWebHostingBundle:DnsRecord:edit }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+cherez_web_hosting_cp_dns_record_delete:
+    pattern:  /dns_record/delete/{dnsRecord}
+    defaults: { _controller: CherezWebHostingBundle:DnsRecord:delete }
+    options: { expose: true }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"

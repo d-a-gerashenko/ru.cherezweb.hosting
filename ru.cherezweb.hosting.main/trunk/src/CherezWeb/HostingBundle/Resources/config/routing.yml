@@ -1,0 +1,55 @@
+_cherez_web_hosting_security:
+    resource: "@CherezWebHostingBundle/Resources/config/routing/security.yml"
+    prefix:   /security
+
+_cherez_web_hosting_cp:
+    resource: "@CherezWebHostingBundle/Resources/config/routing/cp.yml"
+    prefix:   /cp
+
+_cherez_web_hosting_tutorial:
+    resource: "@CherezWebHostingBundle/Resources/config/routing/tutorial.yml"
+    prefix:   /tutorial
+    
+cherez_web_hosting_action_link_execute:
+    pattern: /link/{code}
+    defaults: { _controller: CherezWebHostingBundle:MailAction:execute }
+
+cherez_web_hosting_service_about:
+    pattern:  /about
+    defaults: { _controller: CherezWebHostingBundle:Service:about }
+    options: { expose: true }
+    
+cherez_web_hosting_service_relocation:
+    pattern:  /relocation
+    defaults: { _controller: CherezWebHostingBundle:Service:relocation }
+    options: { expose: true }
+
+cherez_web_hosting_service_terms_of_service:
+    pattern:  /terms_of_service
+    defaults: { _controller: CherezWebHostingBundle:Service:termsOfService }
+    options: { expose: true }
+    
+cherez_web_hosting_service_rules_of_service:
+    pattern:  /rules_of_service
+    defaults: { _controller: CherezWebHostingBundle:Service:rulesOfService }
+    options: { expose: true }
+    
+cherez_web_hosting_service_support:
+    pattern:  /support
+    defaults: { _controller: CherezWebHostingBundle:Service:support }
+    options: { expose: true }
+    
+cherez_web_hosting_service_pricing:
+    pattern:  /pricing
+    defaults: { _controller: CherezWebHostingBundle:Service:pricing }
+    options: { expose: true }
+
+cherez_web_hosting_service_index:
+    pattern:  /
+    defaults: { _controller: CherezWebHostingBundle:Service:index }
+    options: { expose: true }
+
+cherez_web_hosting_api_dns:
+    pattern:  /api/dns
+    defaults: { _controller: CherezWebHostingBundle:DnsApi:api }
+    

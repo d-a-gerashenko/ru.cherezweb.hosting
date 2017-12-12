@@ -1,0 +1,10 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Добавлен ftp доступ на площадку "{{ allocationName }}"
+---
+Хост: {{ ftpHost }}
+Логин: {{ ftpLogin }}
+Пароль: {{ ftpPassword }}
+Директория: {{ ftpDir }}
+{% endblock content %}

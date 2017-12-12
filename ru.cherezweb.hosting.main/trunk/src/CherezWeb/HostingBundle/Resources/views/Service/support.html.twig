@@ -1,0 +1,21 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{% form_theme form 'MopaBootstrapBundle:Form:fields.html.twig' %}
+{% extends 'CherezWebHostingBundle::layout.html.twig' %}
+{% from 'MopaBootstrapBundle::macros.html.twig' import label, badge %}
+{% set headTitle = 'Техподдержка' %}
+{% block headline %}Техподдержка{% endblock headline %}
+{% block content_content %}
+    {{ flash('info',
+        '
+            <p>График работы по МСК: AM2:00 - AM11:00 (МСК+7:00).</p>
+        ',
+    'button', true) }}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Отправить письмо на <a style="color: #fff;" href="mailto:support@cherezweb.ru" target="_blank">support@cherezweb.ru</a>
+        </div>
+        <div class="panel-body">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock content_content %}

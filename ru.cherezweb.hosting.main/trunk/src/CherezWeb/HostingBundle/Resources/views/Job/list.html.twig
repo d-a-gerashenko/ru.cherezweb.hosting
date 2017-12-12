@@ -1,0 +1,35 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{% extends 'CherezWebHostingBundle:Allocation:layout.html.twig' %}
+{% block content_content %}
+    <p><button type="button" class="btn btn-success batabase-create-btn">Создать задание по расписанию</button></p>
+    {{ flash('info',
+        '
+            <p>Задачи по расписанию позволяют выполнять расположенный на площадке php скрипт.</p>
+            <p>Если же вам требуется выполнять по расписанию команду, или вы просто привыкли работать с утилитой crontab, вы всегда можете получить к ней доступ через ssh.</p>
+        ',
+    'button', true) }}
+    <div class="jobs-ajax"><img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/></div>
+{% endblock content_content %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.batabase-create-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_job_create', {allocation: {{ allocation.id }}}));
+            });
+            var jobsAjax = $('.jobs-ajax');
+            var updateItemsFunction = function () {
+                $.chwAjax().makeRequest({
+                    url: Routing.generate('cherez_web_hosting_cp_job_list', {allocation: {{ allocation.id }}}),
+                    silent: true,
+                    htmlResponseHandler: function (responseContainer) {
+                        jobsAjax.html('');
+                        jobsAjax.append(responseContainer);
+                    }
+                });
+                setTimeout(updateItemsFunction, 10000);
+            };
+            updateItemsFunction();
+        });
+    </script>
+{% endblock foot_script_assetic %}

@@ -1,0 +1,12 @@
+<h2><a href="{{ path('cherez_web_hosting_tutorial_index') }}"><span aria-hidden="true" class="glyphicon glyphicon-question-sign"></span>&nbsp;Справочник</a></h2>
+<ul>
+    <li>Ответы на часто задаваемые вопросы.</li>
+    <li>Статьи по настройке хостинга.</li>
+</ul>
+{% if tutorials %}
+    <ul class="nav">
+        {% for tutorial in tutorials %}
+            <li><a href="{{ path('cherez_web_hosting_tutorial_show', {'tutorial': tutorial.id}) }}">{{ tutorial.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

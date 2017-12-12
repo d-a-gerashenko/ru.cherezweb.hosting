@@ -1,0 +1,9 @@
+parameters:
+    cherez_web.billing.secret: '000'
+    cherez_web.billing.robokassa.merchan_login: 'hosting.mydomain.ru'
+    cherez_web.billing.robokassa.merchan_pass_1: '000'
+    cherez_web.billing.robokassa.merchan_pass_2: '000'
+services:
+    cherez_web.billing.billing:
+        class: CherezWeb\BillingBundle\Service\Billing
+        arguments: [@doctrine.orm.entity_manager]

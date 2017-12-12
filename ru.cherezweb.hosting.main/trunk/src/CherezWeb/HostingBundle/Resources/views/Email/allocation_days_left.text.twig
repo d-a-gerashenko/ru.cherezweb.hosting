@@ -1,0 +1,8 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Площадка "{{ allocation.name }}" оплачена до {{ allocation.paidTill | date("d.m.Y") }}
+---
+Не забывайте своевременно продлевать свои площадки. Сайты на просроченных площадках блокируются и через 15 дней безвозвратно удаляются.
+Если площадка "{{ allocation.name }}" вам больше не нужна, и вы не хотите получать данное уведомление - удалите площадку через панель хостинга: http://hosting.cherezweb.ru{{ path('cherez_web_hosting_cp_allocation_list') }}
+{% endblock content %}

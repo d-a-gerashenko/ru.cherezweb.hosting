@@ -1,0 +1,29 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <p>
+        DNS запись #{{ dnsRecord.id }} для хоста <b>"{{ dnsRecord.hostInDomainStyle }}"</b> будет удалена с вашего аккаунта.
+    </p>
+    <p>
+        Вы действительно хотите удалить DNS запись #{{ dnsRecord.id }} для хоста <b>"{{ dnsRecord.hostInDomainStyle }}"</b>?
+    </p>
+    <hr/>
+    <button type="button" class="btn btn-primary">Отменить</button>
+    <button type="button" class="btn btn-danger domainbase-delete-btn">Удалить DNS запись #{{ dnsRecord.id }}</button>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Удаление DNS записи #{{ dnsRecord.id }} для хоста "{{ dnsRecord.hostInDomainStyle }}"',
+                width: 800
+            });
+            container.find('.domainbase-delete-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_dns_record_delete', {dnsRecord: "{{ dnsRecord.id }}", confirmed: true}));
+            });
+            container.find('.btn-primary').click(function (e) {
+                container.dialog('close');
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

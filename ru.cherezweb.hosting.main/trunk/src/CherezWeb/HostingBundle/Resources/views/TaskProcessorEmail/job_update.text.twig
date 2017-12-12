@@ -1,0 +1,9 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Изменено задание на площадке "{{ allocationName }}"
+---
+Номер задания: {{ jobId }}
+Расписание запуска (в формате cron): {{ jobSchedule }}
+Скрипт для запуска: {{ jobScriptPath }}
+{% endblock content %}

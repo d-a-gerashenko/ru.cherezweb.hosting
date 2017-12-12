@@ -1,0 +1,10 @@
+{% extends 'CherezWebHostingBundle:Email:layout.html.twig' %}
+
+{% block content %}
+    <h4>Изменен путь ftp доступа на площадке "{{ allocationName }}"</h4>
+    <p>
+        Хост: {{ ftpHost }}<br/>
+        Логин: {{ ftpLogin }}<br/>
+        Директория: {{ ftpDir }}<br/>
+    </p>
+{% endblock content %}

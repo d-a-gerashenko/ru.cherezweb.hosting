@@ -1,0 +1,17 @@
+{% extends 'CherezWebHostingBundle::layout.html.twig' %}
+{% from 'MopaBootstrapBundle::macros.html.twig' import label, badge %}
+{% set headTitle = 'Справочник' %}
+{% block headline %}Справочник{% endblock headline %}
+{% block content_content %}
+    {% if not tutorials %}
+        Пока в справочнике нет ни одной статьи...
+    {% else %}
+        {% for tutorial in tutorials %}
+            <h2><a href="{{ path('cherez_web_hosting_tutorial_show', {'tutorial': tutorial.id}) }}">{{ tutorial.title }}</a></h2>
+            <p>
+                {{ tutorial.description }}
+            </p>
+            <p><a href="{{ path('cherez_web_hosting_tutorial_show', {'tutorial': tutorial.id}) }}">Читать далее <span aria-hidden="true" class="glyphicon glyphicon-eye-open"></span></a></p>
+        {% endfor %}
+    {% endif %}
+{% endblock content_content %}

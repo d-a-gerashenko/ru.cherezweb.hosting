@@ -1,0 +1,71 @@
+{% extends 'CherezWebDefaultBundle::layout.html.twig' %}
+{% block headTitleBase %}
+    Хостинг ЧерезВеб - выгодный хостинг
+{% endblock headTitleBase %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite,uglifycss'
+        'bundles/cherezwebhosting/blocks/chwh/chwh.css'
+        'bundles/cherezwebhosting/lib/jquery-cron/0.1.4.1/jquery-cron.css'
+    %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock stylesheets %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts filter='uglifyjs2'
+        'bundles/cherezwebhosting/lib/jquery-cron/0.1.4.1/jquery-cron.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock foot_script_assetic %}
+{% block counter_script %}
+    {{ parent() }}
+    <!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter32395925 = new Ya.Metrika({ id:32395925, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/32395925" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+{% endblock counter_script %}
+{% block navbar %}
+    <header class="{% block navbar_class %}navbar navbar-inverse navbar-static-top{% endblock navbar_class %}" id="top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Навигация</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{{ path('cherez_web_hosting_service_index') }}" class="logo" title="Хостинг ЧерезВеб"></a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse">
+                {#<ul class="nav navbar-nav">
+                    <li><a href="{{ path('cherez_web_hosting_service_index') }}">Главная</a></li>
+                    <li><a href="{{ path('cherez_web_hosting_service_index') }}">Новости</a></li>
+                </ul>#}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="{% if app.request.get('_route') == 'cherez_web_hosting_service_about' %}active{% endif %}"><a href="{{ path('cherez_web_hosting_service_about') }}">О нас</a></li>
+                    <li class="dropdown">
+                        <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Цены и услуги<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li class="{% if app.request.get('_route') == 'cherez_web_hosting_service_pricing' %}active{% endif %}"><a href="{{ path('cherez_web_hosting_service_pricing') }}">Цены</a></li>
+                          <li class="{% if app.request.get('_route') == 'cherez_web_hosting_service_relocation' %}active{% endif %}"><a href="{{ path('cherez_web_hosting_service_relocation') }}">Бесплатный переезд</a></li>
+                          <li class="divider" role="separator"></li>
+                          <li class="{% if app.request.get('_route') == 'cherez_web_hosting_service_rules_of_service' %}active{% endif %}"><a href="{{ path('cherez_web_hosting_service_rules_of_service') }}">Правила пользования хостингом</a></li>
+                        </ul>
+                    </li>
+                    <li class="{% if app.request.get('_route') == 'cherez_web_hosting_service_support' %}active{% endif %}"><a href="{{ path('cherez_web_hosting_service_support') }}">Техподдержка</a></li>
+                    {% if app.user %}
+{#                        <li><p class="navbar-text">{{ app.user.email }}</p></li>#}
+{#                        <li><button onclick="document.location='{{ path('cherez_web_hosting_cp_index') }}';" class="btn btn-primary navbar-btn">Панель управления</button>&nbsp;</li>#}
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.location='{{ path('cherez_web_hosting_cp_index') }}';" class="btn btn-primary navbar-btn">{{ app.user.email }} ({{ (app.user.wallet.balance / 100) | number_format(2, ',', ' ') }}&nbsp;р.)</button></li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.location='{{ path('cherez_web_hosting_security_logout') }}';" class="btn btn-danger navbar-btn">Выход</button></li>
+                    {% else %}
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.location='{{ path('cherez_web_hosting_security_registartion') }}';" class="btn btn-warning navbar-btn">Регистрация</button></li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.location='{{ path('cherez_web_hosting_security_login') }}';" class="btn btn-success navbar-btn">Авторизация</button></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock navbar %}
+{% block content_sidebar %}
+    {{ render(controller("CherezWebHostingBundle:Tutorial:sidebarBlock")) }}
+{% endblock content_sidebar %}

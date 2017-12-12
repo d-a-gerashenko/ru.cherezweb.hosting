@@ -1,0 +1,98 @@
+services:
+    cherez_web.hosting.server_commander:
+        class: CherezWeb\HostingBundle\Service\ServerCommander
+    cherez_web.hosting.task_manager:
+        class: CherezWeb\HostingBundle\Service\TaskManager
+        arguments: [@service_container]
+    cherez_web.hosting.dns_record_manager:
+        class: CherezWeb\HostingBundle\Service\DnsRecordManager
+        arguments: [@service_container]
+    cherez_web.hosting.domain_base_manager:
+        class: CherezWeb\HostingBundle\Service\DomainBaseManager
+        arguments: [@service_container]
+        
+    cherez_web.hosting.task_processor.allocation.create:
+        class: CherezWeb\HostingBundle\TaskProcessor\Allocation\Create
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.allocation.delete:
+        class: CherezWeb\HostingBundle\TaskProcessor\Allocation\Delete
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.allocation.update_lock:
+        class: CherezWeb\HostingBundle\TaskProcessor\Allocation\UpdateLock
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.allocation.update_password:
+        class: CherezWeb\HostingBundle\TaskProcessor\Allocation\UpdatePassword
+        tags: [{ name: cherez_web.hosting.task_processor}]
+        
+    cherez_web.hosting.task_processor.database.create:
+        class: CherezWeb\HostingBundle\TaskProcessor\Database\Create
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.database.delete:
+        class: CherezWeb\HostingBundle\TaskProcessor\Database\Delete
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.database.update_password:
+        class: CherezWeb\HostingBundle\TaskProcessor\Database\UpdatePassword
+        tags: [{ name: cherez_web.hosting.task_processor}]
+        
+    cherez_web.hosting.task_processor.domain.create:
+        class: CherezWeb\HostingBundle\TaskProcessor\Domain\Create
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.domain.delete:
+        class: CherezWeb\HostingBundle\TaskProcessor\Domain\Delete
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.domain.update:
+        class: CherezWeb\HostingBundle\TaskProcessor\Domain\Update
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    
+    cherez_web.hosting.task_processor.ftp.create:
+        class: CherezWeb\HostingBundle\TaskProcessor\Ftp\Create
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.ftp.delete:
+        class: CherezWeb\HostingBundle\TaskProcessor\Ftp\Delete
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.ftp.update_dir_path:
+        class: CherezWeb\HostingBundle\TaskProcessor\Ftp\UpdateDirPath
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.ftp.update_password:
+        class: CherezWeb\HostingBundle\TaskProcessor\Ftp\UpdatePassword
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    
+    cherez_web.hosting.task_processor.job.create:
+        class: CherezWeb\HostingBundle\TaskProcessor\Job\Create
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.job.delete:
+        class: CherezWeb\HostingBundle\TaskProcessor\Job\Delete
+        tags: [{ name: cherez_web.hosting.task_processor}]
+    cherez_web.hosting.task_processor.job.update:
+        class: CherezWeb\HostingBundle\TaskProcessor\Job\Update
+        tags: [{ name: cherez_web.hosting.task_processor}]
+        
+    security.access.allocation_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\AllocationVoter
+        public:     false
+        tags: [{ name: security.voter }]
+    security.access.database_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\DatabaseVoter
+        public:     false
+        tags: [{ name: security.voter }]
+    security.access.domain_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\DomainVoter
+        public:     false
+        tags: [{ name: security.voter }]
+    security.access.ftp_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\FtpVoter
+        public:     false
+        tags: [{ name: security.voter }]
+    security.access.job_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\JobVoter
+        public:     false
+        tags: [{ name: security.voter }]
+    security.access.domain_base_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\DomainBaseVoter
+        public:     false
+        tags: [{ name: security.voter }]
+    security.access.dns_record_voter:
+        class:      CherezWeb\HostingBundle\Security\Authorization\Voter\DnsRecordVoter
+        public:     false
+        arguments: [@doctrine.orm.entity_manager]
+        tags: [{ name: security.voter }]

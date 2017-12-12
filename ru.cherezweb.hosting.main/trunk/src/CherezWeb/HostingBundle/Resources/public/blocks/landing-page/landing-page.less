@@ -1,0 +1,24 @@
+.landing-page .navbar .logo {
+    margin: 0;
+}
+.landing-page .navbar.navbar-scroll .logo {
+    background-image: url('logo_darck.png');
+}
+.landing-page .hyphenation {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  /* Non standard for webkit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+@import "../../../mopabootstrap/bootstrap/less/variables.less";
+@media (max-width: @screen-sm-min) {
+    .landing-page .navbar .logo {
+        background-image: url('logo_darck.png');
+        margin: 10px;
+    }
+}

@@ -1,0 +1,49 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {% if not jobs %}
+        Список пуст...
+    {% else %}
+        <table class="table table-bordered table-striped table-hover jobs-list">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Путь</th>
+                    <th>Расписание</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                    <tr job-id="{{ job.id }}">
+                        <th scope="row">{{ job.id }}</th>
+                        <td>{{ job.scriptPath }}</td>
+                        <td>{{ job.schedule }}</td>
+                        <td>
+                            {% if job.lockingTasks %}
+                                <b>Обрабатываются задачи:</b><br/>
+                                {% include 'CherezWebHostingBundle:Task:render_task_list.html.twig' with {'tasks': job.lockingTasks} only  %}
+                                <img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/>
+                            {% else %}
+                                <button type="button" class="btn btn-xs btn-primary btn-block job-edit-btn">Редактировать</button>
+                                <button type="button" class="btn btn-xs btn-danger btn-block job-delete-btn">Удалить</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $(function () {
+                var container = $('#{{ responseContainerId }}');
+                container.find('.job-edit-btn').click(function (e) {
+                    var jobId = $(this).closest('tr').attr('job-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_job_edit', {job: jobId}));
+                });
+                container.find('.job-delete-btn').click(function (e) {
+                    var jobId = $(this).closest('tr').attr('job-id');
+                    $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_job_delete', {job: jobId}));
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock content %}

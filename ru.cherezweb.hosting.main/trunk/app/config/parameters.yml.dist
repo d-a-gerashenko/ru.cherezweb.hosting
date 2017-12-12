@@ -1,0 +1,21 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     hosting
+    database_user:     hosting
+    database_password: 123
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    locale:            ru
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            dsfJKKjlkdsfskj390sjLKJs8uhj8j
+
+    debug_toolbar:          true
+    debug_redirects:        false
+    use_assetic_controller: true
+
+    images_cache_prefix: img_cache

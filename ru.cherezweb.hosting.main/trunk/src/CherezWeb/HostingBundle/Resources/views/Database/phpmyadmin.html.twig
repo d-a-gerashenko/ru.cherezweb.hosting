@@ -1,0 +1,58 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    {{ flash('warning',
+        '
+            <p>Для входа в phpMyAdmin вам потребуются: логин, пароль и сервер базы данных.</p>
+            <p>Логин и сервер предоставлены в этом окне.</p>
+            <p>Пароль базы должен храниться у вас, если у вас его нет, вы можете восстановить доступ к базе, изменив пароль базы.</p>
+        ',
+    'button', true) }}
+    <form class="form-horizontal" method="post" action="http://phpmyadmin.hosting.cherezweb.ru/" novalidate="novalidate" target="_blank">
+        <fieldset>
+            <div class="form-group">
+                <label for="pma_username" class=" control-label col-lg-3 required">
+                    Пользователь
+                </label>
+                <div class="col-lg-9">
+                    <p class="form-control-static">
+                        {{ database.login }}
+                    </p>
+                </div>
+            </div>
+            {#<div class="form-group">
+                <label for="pma_password" class=" control-label col-lg-3 required">
+                    База данных
+                </label>
+                <div class="col-lg-9">
+                    <input id="pma_password" name="pma_password" required="required" class="domain-name-field form-control" type="password"/>
+                </div>
+            </div>#}
+            <div class="form-group">
+                <label for="server" class=" control-label col-lg-3 required">
+                    Сервер базы данных
+                </label>
+                <div class="col-lg-9">
+                    <p class="form-control-static">
+                        {{ database.allocation.quota.server.ipAddress }}
+                    </p>
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn btn-primary">
+                    Перейти в phpMyAdmin
+                </button>
+            </div>
+        </fieldset>
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Управление базой данных через phpMyAdmin редактор'
+            });
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

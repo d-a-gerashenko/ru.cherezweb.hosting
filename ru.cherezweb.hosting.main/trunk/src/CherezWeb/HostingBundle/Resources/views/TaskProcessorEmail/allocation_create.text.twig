@@ -1,0 +1,9 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Создана площадка "{{ allocationName }}".
+SSH доступ:
+    Хост: {{ allocationHost }}
+    Логин: {{ allocationName }}
+    Пароль: {{ allocationPassword }}
+{% endblock content %}

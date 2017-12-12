@@ -1,0 +1,28 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <p>
+        Площадка <b>"{{ allocation.name }}"</b> будет удалена, а на ваш баланс будет возвращена сумма за неиспользованные дни: <b>{{ (sumToReturn / 100) | number_format(2, ',', ' ') }}&nbsp;р.&nbsp;/&nbsp;{{ daysLeft }}&nbsp;дн.</b>
+    </p>
+    <p>
+        Вы действительно хотите удалить площадку <b>"{{ allocation.name }}"</b>?
+    </p>
+    <hr/>
+    <button type="button" class="btn btn-primary">Отменить</button>
+    <button type="button" class="btn btn-danger allocation-delete-btn">Удалить площадку "{{ allocation.name }}"</button>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Удаление площадки'
+            });
+            container.find('.allocation-delete-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_allocation_delete', {allocation: "{{ allocation.id }}", confirmed: true}));
+            });
+            container.find('.btn-primary').click(function (e) {
+                container.dialog('close');
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

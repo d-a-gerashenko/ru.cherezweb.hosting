@@ -1,0 +1,11 @@
+{% extends 'CherezWebHostingBundle::layout.html.twig' %}
+{% set headTitle = 'Панель управления' %}
+{% block headline %}Панель управления{% endblock headline %}
+{% block content_sidebar %}
+    <div class="list-group">
+        <a href="{{ path('cherez_web_hosting_cp_allocation_list') }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_allocation_list' %} active{% endif %}">Площадки</a>
+        <a href="{{ path('cherez_web_hosting_cp_domainbase_list') }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_domainbase_list' %} active{% endif %}">Домены аккаунта</a>
+        <a href="{{ path('cherez_web_hosting_cp_account_settings') }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_account_settings' %} active{% endif %}">Настройки аккаунта</a>
+        <a href="{{ path('cherez_web_hosting_cp_billing') }}" class="list-group-item{% if app.request.get('_route') == 'cherez_web_hosting_cp_billing' %} active{% endif %}">Баланс</a>
+    </div>
+{% endblock content_sidebar %}

@@ -1,0 +1,9 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Удален ftp доступ с площадки "{{ allocationName }}"
+---
+Хост: {{ ftpHost }}
+Логин: {{ ftpLogin }}
+Директория: {{ ftpDir }}
+{% endblock content %}

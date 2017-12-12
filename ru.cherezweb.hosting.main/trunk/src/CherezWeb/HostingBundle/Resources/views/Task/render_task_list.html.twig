@@ -1,0 +1,41 @@
+<ul>
+{% for task in tasks %}
+    {% if task.type == "allocation_create" %}
+        <li>Создание площадки</li>
+    {% elseif task.type == "allocation_delete" %}
+        <li>Удаление площадки</li>
+    {% elseif task.type == "allocation_update_lock" %}
+        <li>Обновление блокировки площадки</li>
+    {% elseif task.type == "allocation_update_password" %}
+        <li>Обновление пароля ssh доступа на площадке</li>
+    {% elseif task.type == "database_create" %}
+        <li>Создание базы данных</li>
+    {% elseif task.type == "database_delete" %}
+        <li>Удаление базы данных</li>
+    {% elseif task.type == "database_update_password" %}
+        <li>Обновление пароля базы данных</li>
+    {% elseif task.type == "domain_create" %}
+        <li>Привязка домена</li>
+    {% elseif task.type == "domain_delete" %}
+        <li>Отвязка домена</li>
+    {% elseif task.type == "domain_update" %}
+        <li>Обновление домена</li>
+    {% elseif task.type == "ftp_create" %}
+        <li>Создание FTP доступа</li>
+    {% elseif task.type == "ftp_delete" %}
+        <li>Удаление FTP доступа</li>
+    {% elseif task.type == "ftp_update_dir_path" %}
+        <li>Обновление директории FTP</li>
+    {% elseif task.type == "ftp_update_password" %}
+        <li>Обновление пароля FTP доступа</li>
+    {% elseif task.type == "job_create" %}
+        <li>Создание CRON задачи</li>
+    {% elseif task.type == "job_delete" %}
+        <li>Удаление CRON задачи</li>
+    {% elseif task.type == "job_update" %}
+        <li>Обновление CRON задачи</li>
+    {% else %}
+        {{ task.type }}
+    {% endif %}
+{% endfor %}
+</ul>

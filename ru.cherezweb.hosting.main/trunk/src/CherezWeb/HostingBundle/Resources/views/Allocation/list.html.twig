@@ -1,0 +1,36 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash, advanced_flash %}
+{% extends 'CherezWebHostingBundle:Cp:layout.html.twig' %}
+{% block content_content %}
+    <p><button type="button" class="btn btn-success plan-list-btn">Создать площадку</button></p>
+    {{ flash('info',
+        '
+            <p>Площадка - это абстрактное понятие, обозначающее выделенное на сервере место и ресурсы.</p>
+            <p>Каждая площадка имеет один закрепленный за ней ssh доступ к серверу, на котором она находится.</p>
+            <p><b>Для создания FTP доступов, баз данных и привязки домена - создайте площадку и откройте страницу управления.</b></p>
+        ',
+    'button', true) }}
+    <div class="allocations-ajax"><img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/></div>
+{% endblock content_content %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.plan-list-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_plan_list'));
+            });
+            var allocationsAjax = $('.allocations-ajax');
+            var updateItemsFunction = function () {
+                $.chwAjax().makeRequest({
+                    url: Routing.generate('cherez_web_hosting_cp_allocation_list'),
+                    silent: true,
+                    htmlResponseHandler: function (responseContainer) {
+                        allocationsAjax.html('');
+                        allocationsAjax.append(responseContainer);
+                    }
+                });
+                setTimeout(updateItemsFunction, 10000);
+            };
+            updateItemsFunction();
+        });
+    </script>
+{% endblock foot_script_assetic %}

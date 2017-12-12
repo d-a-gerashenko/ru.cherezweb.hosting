@@ -1,0 +1,15 @@
+{% extends 'CherezWebHostingBundle::layout.html.twig' %}
+{% from 'MopaBootstrapBundle::macros.html.twig' import label, badge %}
+{% set headTitle = 'Справочник / ' ~ tutorial.title %}
+{% block page_header %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('cherez_web_hosting_tutorial_index') }}">Справочник</a></li>
+        <li class="active">{{ tutorial.title }}</li>
+    </ol>
+    <div class="page-header">
+        <h1>{{ tutorial.title }}</h1>
+    </div>
+{% endblock page_header %}
+{% block content_content %}
+    {{ tutorial.content | raw }}
+{% endblock content_content %}

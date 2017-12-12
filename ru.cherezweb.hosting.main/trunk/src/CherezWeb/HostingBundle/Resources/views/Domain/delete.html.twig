@@ -1,0 +1,28 @@
+{% extends "CherezWebDefaultBundle:AjaxResponse:layout.html.twig" %}
+{% block content %}
+    <p>
+        Домен <b>"{{ domain.name }}"</b> будет отвязан от площадки "{{ domain.allocation.name }}".
+    </p>
+    <p>
+        Вы действительно хотите отвязать домен <b>"{{ domain.name }}"</b> от площадки "{{ domain.allocation.name }}"?
+    </p>
+    <hr/>
+    <button type="button" class="btn btn-primary">Отменить</button>
+    <button type="button" class="btn btn-danger domain-delete-btn">Отвязать домен "{{ domain.name }}</button>
+    <script type="text/javascript">
+        $(function () {
+            var container = $('#{{ responseContainerId }}');
+            var dialogParams = $.extend(true, getDefaultAjaxDialogParams(), {
+                title: 'Отвязка домен от площадки'
+            });
+            container.find('.domain-delete-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_domain_delete', {domain: "{{ domain.id }}", confirmed: true}));
+            });
+            container.find('.btn-primary').click(function (e) {
+                container.dialog('close');
+            });
+            
+            container.dialog(dialogParams);
+        });
+    </script>
+{% endblock content %}

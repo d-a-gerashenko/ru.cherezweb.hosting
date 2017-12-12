@@ -1,0 +1,28 @@
+{% extends 'CherezWebHostingBundle:Allocation:layout.html.twig' %}
+{% block content_content %}
+    <p><button type="button" class="btn btn-success database-create-btn">Создать базу данных</button></p>
+    <div class="databases-ajax"><img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/></div>
+{% endblock content_content %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.database-create-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_database_create', {allocation: {{ allocation.id }}}));
+            });
+            var databasesAjax = $('.databases-ajax');
+            var updateItemsFunction = function () {
+                $.chwAjax().makeRequest({
+                    url: Routing.generate('cherez_web_hosting_cp_database_list', {allocation: {{ allocation.id }}}),
+                    silent: true,
+                    htmlResponseHandler: function (responseContainer) {
+                        databasesAjax.html('');
+                        databasesAjax.append(responseContainer);
+                    }
+                });
+                setTimeout(updateItemsFunction, 10000);
+            };
+            updateItemsFunction();
+        });
+    </script>
+{% endblock foot_script_assetic %}

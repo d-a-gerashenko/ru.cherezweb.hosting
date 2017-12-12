@@ -1,0 +1,6 @@
+{% extends 'CherezWebHostingBundle:Email:layout.text.twig' %}
+
+{% block content %}
+Для изменения пароля перейдите по ссылке:
+{{ url('cherez_web_hosting_action_link_execute', {'code': mailAction.code}) }}
+{% endblock content %}

@@ -1,0 +1,8 @@
+{% extends 'CherezWebHostingBundle:Email:layout.html.twig' %}
+
+{% block content %}
+    <h4>Обновлена блокировка площадки "{{ allocationName }}"</h4>
+    <p>
+        Статус блокировки: {{ allocationIsLocked ? 'заблокирована' : 'разблокирована' }}
+    </p>
+{% endblock content %}

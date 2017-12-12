@@ -1,0 +1,28 @@
+{% extends 'CherezWebHostingBundle:Allocation:layout.html.twig' %}
+{% block content_content %}
+    <p><button type="button" class="btn btn-success batabase-create-btn">Создать ftp доступ</button></p>
+    <div class="ftps-ajax"><img src="{{ asset('bundles/cherezwebhosting/img/ajax-loader.gif') }}"/></div>
+{% endblock content_content %}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.batabase-create-btn').click(function (e) {
+                $.chwAjax().makeRequest(Routing.generate('cherez_web_hosting_cp_ftp_create', {allocation: {{ allocation.id }}}));
+            });
+            var ftpsAjax = $('.ftps-ajax');
+            var updateItemsFunction = function () {
+                $.chwAjax().makeRequest({
+                    url: Routing.generate('cherez_web_hosting_cp_ftp_list', {allocation: {{ allocation.id }}}),
+                    silent: true,
+                    htmlResponseHandler: function (responseContainer) {
+                        ftpsAjax.html('');
+                        ftpsAjax.append(responseContainer);
+                    }
+                });
+                setTimeout(updateItemsFunction, 10000);
+            };
+            updateItemsFunction();
+        });
+    </script>
+{% endblock foot_script_assetic %}
